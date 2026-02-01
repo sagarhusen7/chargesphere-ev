@@ -13,10 +13,17 @@ const app = express();
 connectDB();
 
 // Middleware
+// app.use(cors({
+//   origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+//   credentials: true
+// }));
+// ✅ CORS configuration for local + deployed frontend
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || '*', // '*' allows Netlify URL if FRONTEND_URL not set
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
