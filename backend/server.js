@@ -20,9 +20,15 @@ connectDB();
 // ✅ CORS configuration for local + deployed frontend
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*', // '*' allows Netlify URL if FRONTEND_URL not set
-  credentials: true
+  origin: [
+    'http://localhost:5173',
+    'https://chargesphere-evs.netlify.app'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
